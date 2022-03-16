@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class FileHandling {
 
-    private String fileContent; // this attribute stores the content read from a file, and gets updated each time the read7() and readN() are called
+    private String fileContent; // this attribute stores the content read from a file, and gets updated each time the readContent() are called
 
 
     // When an object is made of the class the constructor calls the setFileContent() to add the content from the file to the fileContent attribute
@@ -13,36 +13,27 @@ public class FileHandling {
     }
 
 
-    // read7() and readN() are basacicly the same method, and it would make sence to only have the readN()
-    // but both methods are here because the assignment asks for both.
-
     public String read7(){
 
-        String toReturn = "";
-
-        if (fileContent.length() < 7){ // to avoid the index out of bounds exception when using the substring(), it then just returns what's left of the content.
-            toReturn = fileContent;
-            fileContent = "";
-        }
-        else{
-            toReturn = fileContent.substring(0, 7); // returns from charIndex 0 - 7 from the filecontent
-            fileContent = fileContent.substring(7); // updates the filecontent to start at charIndex 7
-        }
-
-        return toReturn;
+        return readContent(7);
     }
 
     public String readN(int n){
 
-        String toReturn = "";
+        return readContent(n);
+    }
 
-        if (fileContent.length() < n){
+    private String readContent(int numberOfChars){
+
+        String toReturn;
+
+        if (fileContent.length() < numberOfChars){ // makes sure that an index out of bounds exeption does not occur
             toReturn = fileContent;
-            fileContent = "";
+            fileContent = ""; // filecontent should be empty after the last string has been returned.
         }
         else{
-            toReturn = fileContent.substring(0, n);
-            fileContent = fileContent.substring(n);
+            toReturn = fileContent.substring(0, numberOfChars); // returns the string from charindex 0 - the number specified as an argument.
+            fileContent = fileContent.substring(numberOfChars); // updates the filecontent to start from the number specified as an argument.
         }
 
         return toReturn;
